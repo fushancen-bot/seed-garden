@@ -1,4 +1,4 @@
-const { useState: useS, useEffect: useE } = React;
+const { useState: useS, useEffect: useE, useRef: useR } = React;
 
 const KEY = 'xiaoshan_seed_garden_v1';
 
@@ -37,6 +37,7 @@ function App() {
   const [font, setFont] = useS(() => {
     try { return localStorage.getItem(FONT_KEY) || 'serif'; } catch (e) { return 'serif'; }
   });
+  const importRef = useR(null);
 
   useE(() => save(seeds), [seeds]);
   useE(() => {
@@ -83,6 +84,49 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
+  const exportAll = () => {
+    const d = new Date();
+    const stamp = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+    const data = JSON.stringify({ version: 1, exportedAt: d.toISOString(), seeds }, null, 2);
+    const blob = new Blob([data], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `seed-garden-${stamp}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('📦 已导出全部数据');
+  };
+
+  const handleImportFile = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        const incoming = Array.isArray(parsed) ? parsed : (parsed.seeds || []);
+        const valid = incoming.filter((s) => s && s.id && s.body);
+        if (!valid.length) { showToast('没找到有效的种子数据'); return; }
+        const existingIds = new Set(seeds.map((s) => s.id));
+        const fresh = valid.filter((s) => !existingIds.has(s.id));
+        const dup = valid.length - fresh.length;
+        const msg = dup
+          ? `发现 ${valid.length} 颗种子，其中 ${dup} 颗已存在会跳过，导入剩余 ${fresh.length} 颗？`
+          : `发现 ${valid.length} 颗种子，合并导入？`;
+        if (fresh.length === 0) { showToast('全部种子已存在，无需导入'); return; }
+        if (confirm(msg)) {
+          setSeeds((prev) => [...fresh, ...prev]);
+          showToast(`🌱 导入了 ${fresh.length} 颗种子`);
+        }
+      } catch (_) {
+        showToast('文件解析失败，请确认是 JSON 格式');
+      }
+      e.target.value = '';
+    };
+    reader.readAsText(file);
+  };
+
   const live = seeds.filter((s) => !s.bloomed);
   const bloomed = seeds.filter((s) => s.bloomed);
 
@@ -113,6 +157,18 @@ function App() {
             <div className="font-pill">
               <button className={'fbtn' + (font === 'serif' ? ' sel' : '')} onClick={() => setFont('serif')}>宋体</button>
               <button className={'fbtn' + (font === 'system' ? ' sel' : '')} onClick={() => setFont('system')}>系统</button>
+            </div>
+            <div className="font-pill">
+              <button className="fbtn" onClick={exportAll}>↓ 导出</button>
+              <label className="fbtn import-label" htmlFor="sg-import-file">↑ 导入</label>
+              <input
+                id="sg-import-file"
+                ref={importRef}
+                type="file"
+                accept=".json"
+                style={{ display: 'none' }}
+                onChange={handleImportFile}
+              />
             </div>
           </div>
         </div>
