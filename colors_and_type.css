@@ -1,0 +1,219 @@
+/* ============================================================
+   小山 Design System · Colors & Type tokens
+   Two coexisting modes:
+     default  — "Paper" mode (index.html, journal.html)  — warm, paper-like
+     [data-surface="notes"] — "Notes" mode (thought.html) — apple-notes-like, multi-theme
+   Fonts are loaded from Google Fonts; 汇文明朝体 is local (fonts/).
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+@font-face {
+  font-family: 'Huiwen Mincho';
+  src: url('./fonts/汇文明朝体.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- PAPER MODE (default) ---------- */
+
+  /* Base surface */
+  --paper-bg:            #f6f2ec;  /* warm off-white paper */
+  --paper-card:          rgba(255,255,255,0.5);   /* floating card on paper */
+  --paper-card-strong:   rgba(255,255,255,0.72);
+
+  /* Ink / text */
+  --paper-ink:           #2a2520;               /* primary ink, near-black warm */
+  --paper-ink-body:      rgba(42,37,32,0.88);
+  --paper-ink-2:         rgba(90,74,56,0.55);   /* secondary warm brown */
+  --paper-ink-3:         rgba(139,115,85,0.4);  /* faint */
+  --paper-ink-4:         rgba(139,115,85,0.25); /* barely-there, for icons */
+
+  /* Accent — all the same warm-brown hue, just opacity steps */
+  --paper-accent:          rgba(139,115,85,1);
+  --paper-accent-line:     rgba(168,132,88,0.4);  /* underlines, starred border */
+  --paper-accent-15:       rgba(139,115,85,0.15);
+  --paper-accent-12:       rgba(139,115,85,0.12);
+  --paper-accent-08:       rgba(139,115,85,0.08);
+  --paper-accent-06:       rgba(139,115,85,0.06);
+  --paper-accent-wash:     rgba(139,115,85,0.07);
+
+  /* Semantic — journal-only */
+  --mood-green:            #7a8c73;              /* checkmark green, gentle army */
+  --mood-green-bg:         rgba(122,140,115,0.08);
+  --danger-soft:           rgba(180,80,80,0.6);
+
+  /* Mood swatches (5, 1:1 with the emoji set) */
+  --mood-sun:    #f2c26b;   /* ☀️ */
+  --mood-rain:   #8ca9c4;   /* 🌧️ */
+  --mood-leaf:   #7a8c73;   /* 🌿 */
+  --mood-cloud:  #b5b0a6;   /* ☁️ */
+  --mood-moon:   #4d4566;   /* 🌙 */
+
+  /* ---------- TYPE FAMILIES ---------- */
+
+  --font-serif:   'Noto Serif SC', 'Songti SC', serif;         /* 宋体 — default body */
+  --font-mincho:  'Huiwen Mincho', 'Noto Serif SC', serif;     /* 明朝 — alt body */
+  --font-system:  -apple-system, 'Helvetica Neue', 'PingFang SC', sans-serif;  /* 系统 */
+  --font-accent:  'EB Garamond', Georgia, serif;               /* English / numerals */
+  --font-italic:  'Crimson Pro', Georgia, serif;               /* italic callouts */
+  --font-current: var(--font-serif);                           /* user-picked */
+
+  /* ---------- TYPE ROLES ---------- */
+
+  --h-site:      600 28px/1.3  var(--font-current);  /* site title 小山的文字 */
+  --h-title:     600 26px/1.5  var(--font-current);  /* post / page title */
+  --h-post:      500 20px/1.5  var(--font-current);  /* list item title */
+  --h-section:   500 18px/1.5  var(--font-current);
+  --t-body:      300 15px/1.85 var(--font-current);  /* post body, long form */
+  --t-body-sans: 400 14.5px/1.7 var(--font-system);  /* body when system font picked */
+  --t-journal:   300 16px/1.9  var(--font-current);  /* entries in carousel */
+  --t-meta:      400 12px/1.5  var(--font-accent);   /* dates, numerals */
+  --t-tag:       400 11px/1.4  var(--font-current);
+  --t-subtitle:  italic 400 15px/1.7 var(--font-italic);
+  --t-hint:      italic 400 11px/1.5 var(--font-italic);
+
+  --tracking-title: 0.08em;
+  --tracking-meta:  0.06em;
+  --tracking-foot:  0.1em;
+
+  /* ---------- SPACING ---------- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px;
+  --s-4: 16px; --s-5: 20px; --s-6: 24px;
+  --s-7: 32px; --s-8: 40px; --s-9: 56px;
+  --max-read: 680px;     /* blog reading width */
+  --max-journal: 600px;  /* journal narrower */
+
+  /* ---------- RADII ---------- */
+  --r-chip:  12px;   /* month tabs, chips, input card */
+  --r-pill:  16px;   /* save button, toast */
+  --r-card:  16px;   /* input card, toast */
+  --r-big:   20px;   /* nav button */
+  --r-round: 50%;    /* font picker button */
+  --r-check: 7px;    /* checkbox */
+
+  /* ---------- SHADOWS / ELEVATION ---------- */
+  --shd-dropdown: 0 8px 32px rgba(42,37,32,0.08);
+  --shd-toast:    0 12px 40px rgba(42,37,32,0.12);
+  --shd-picker:   0 4px 20px rgba(42,37,32,0.1);
+
+  /* ---------- BORDERS ---------- */
+  --bd-hairline:  1px solid rgba(139,115,85,0.1);   /* article divider */
+  --bd-card:      1px solid rgba(139,115,85,0.08);  /* input card */
+  --bd-dropdown:  1px solid rgba(139,115,85,0.12);
+  --bd-entry:     2px solid rgba(139,115,85,0.1);   /* entry left-border */
+  --bd-entry-star:2px solid rgba(168,132,88,0.45);  /* starred entry */
+
+  /* ---------- MOTION ---------- */
+  --ease-soft:   cubic-bezier(.25,.1,.25,1);
+  --t-micro: 0.2s;     /* hover */
+  --t-short: 0.3s;     /* card interactions */
+  --t-enter: 0.5s;     /* fadeUp */
+  --t-page:  0.8s;     /* header on load */
+
+  /* ---------- TEXTURES ---------- */
+  --grain-opacity: 0.03;   /* body::before grain */
+  --wash-opacity:  0.06;   /* body::after radial ink wash */
+}
+
+/* ============================================================
+   NOTES MODE — thought.html / 文库 (Apple Notes style, multi-theme)
+   Opt in per-page with <body data-surface="notes" data-theme="light|frost|green|dark">
+   ============================================================ */
+
+[data-surface="notes"] {
+  --font-current: var(--font-system);
+}
+
+[data-surface="notes"][data-theme="light"],
+[data-surface="notes"]:not([data-theme]) {
+  --bg: #f2f1ed;
+  --sidebar: rgba(255,255,255,0.72);
+  --border: rgba(0,0,0,0.06);
+  --card: #ffffff;
+  --card-hov: #f8f8f6;
+  --shadow: 0 1px 3px rgba(0,0,0,0.05);
+  --tx: #1d1d1f;
+  --tx2: #86868b;
+  --tx3: #aeaeb2;
+  --acc: #d49a3e;           /* warm gold — ties Notes mode to Paper mode */
+  --acc-soft: rgba(212,154,62,0.1);
+  --div: rgba(0,0,0,0.05);
+  --editor: #ffffff;
+  --search: rgba(0,0,0,0.04);
+  --tag-bg: rgba(0,0,0,0.04);
+  --sel: rgba(212,154,62,0.12);
+  --tag-story:     #d49a3e;   /* 故事 */
+  --tag-braindump: #6ba67a;   /* 脑洞 */
+  --tag-char:      #b86da0;   /* 角色 */
+  --tag-frag:      #6897b4;   /* 片段 */
+}
+
+[data-surface="notes"][data-theme="frost"] {
+  --bg: #e8eaed; --sidebar: rgba(255,255,255,0.45); --border: rgba(255,255,255,0.3);
+  --card: rgba(255,255,255,0.55); --card-hov: rgba(255,255,255,0.72);
+  --shadow: 0 1px 4px rgba(0,0,0,0.06), inset 0 0.5px 0 rgba(255,255,255,0.5);
+  --tx: #1a1a2e; --tx2: #6b6b80; --tx3: #9d9db0;
+  --acc: #5e7ce2; --acc-soft: rgba(94,124,226,0.1);
+  --div: rgba(255,255,255,0.3); --editor: rgba(255,255,255,0.5);
+  --search: rgba(255,255,255,0.35); --tag-bg: rgba(94,124,226,0.08);
+  --sel: rgba(94,124,226,0.1);
+  --tag-story: #5e7ce2; --tag-braindump: #4bb882; --tag-char: #a06dc4; --tag-frag: #6d8eb4;
+}
+
+[data-surface="notes"][data-theme="green"] {
+  --bg: #eef2ec; --sidebar: rgba(245,248,243,0.78); --border: rgba(60,80,50,0.06);
+  --card: rgba(255,255,255,0.7); --card-hov: rgba(255,255,255,0.85);
+  --shadow: 0 1px 3px rgba(40,70,30,0.06);
+  --tx: #2a3328; --tx2: #6e7d6a; --tx3: #a0ac9c;
+  --acc: #5a8c5e; --acc-soft: rgba(90,140,94,0.1);
+  --div: rgba(60,80,50,0.06); --editor: rgba(255,255,255,0.65);
+  --search: rgba(60,80,50,0.04); --tag-bg: rgba(90,140,94,0.08);
+  --sel: rgba(90,140,94,0.1);
+  --tag-story: #5a8c5e; --tag-braindump: #7aa84e; --tag-char: #9a7ab8; --tag-frag: #5d8a7a;
+}
+
+[data-surface="notes"][data-theme="dark"] {
+  --bg: #161618; --sidebar: rgba(30,30,32,0.85); --border: rgba(255,255,255,0.06);
+  --card: rgba(44,44,48,0.6); --card-hov: rgba(54,54,58,0.75);
+  --shadow: 0 1px 3px rgba(0,0,0,0.3), inset 0 0.5px 0 rgba(255,255,255,0.04);
+  --tx: #e5e5e7; --tx2: #8e8e93; --tx3: #636366;
+  --acc: #d4a574; --acc-soft: rgba(212,165,116,0.12);
+  --div: rgba(255,255,255,0.06); --editor: rgba(28,28,30,0.9);
+  --search: rgba(255,255,255,0.06); --tag-bg: rgba(212,165,116,0.1);
+  --sel: rgba(212,165,116,0.1);
+  --tag-story: #d4a574; --tag-braindump: #8bc7a3; --tag-char: #c49abd; --tag-frag: #8aafc4;
+}
+
+/* ============================================================
+   KEYFRAMES — from source, canonicalized
+   ============================================================ */
+@keyframes xs-breathe { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.7; } }
+@keyframes xs-fadeUp  { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes xs-fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes xs-slideIn { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes xs-checkPop { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
+
+/* ============================================================
+   UTILITIES — grain + radial wash (use on body or wrapper)
+   ============================================================ */
+.xs-paper-bg {
+  background: var(--paper-bg);
+  color: var(--paper-ink);
+  font: var(--t-body);
+}
+.xs-paper-bg::before {
+  content: ''; position: fixed; inset: 0;
+  opacity: var(--grain-opacity); pointer-events: none; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+.xs-paper-bg::after {
+  content: ''; position: fixed; top: -120px; right: -80px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(ellipse, var(--paper-accent-06) 0%, transparent 70%);
+  animation: xs-breathe 6s ease-in-out infinite;
+  pointer-events: none; z-index: 0;
+}
